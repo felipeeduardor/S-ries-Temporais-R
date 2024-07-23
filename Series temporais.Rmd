@@ -1,0 +1,80 @@
+---
+title: "Séries Temporais"
+
+---
+
+```{r}
+install.packages("forecast")
+library(forecast)
+
+```
+
+## R 
+conhecendo os dados
+```{r}
+AirPassengers
+start(AirPassengers)
+end(AirPassengers)
+frequency(AirPassengers)
+```
+
+
+Gráficos
+```{r}
+#Executar com crtrl+ shift + Enter
+plot(AirPassengers)
+plot(aggregate(AirPassengers))
+```
+
+Gera uma janela
+```{r}
+subst = window(AirPassengers,start=c(1960,1), end=c(1960,12))
+subst
+plot(subst)
+```
+Decomposição
+```{r}
+dec = decompose(AirPassengers)
+dec
+```
+
+
+
+```{r}
+attributes(dec)
+dec$seasonal
+```
+
+Analisando os elementos de decomposição
+```{r}
+#Executar com crtrl +shift + Enter
+plot(dec)
+plot(dec$x)
+plot(dec$seasonal)
+plot(dec$trend)
+plot(dec$random)
+```
+
+
+
+Suavização Exponencial
+```{r}
+ets = ets(AirPassengers)
+ets
+```
+
+
+Previsão
+```{r}
+previsao = forecast(ets, h=12)
+plot(previsao)
+previsao
+```
+
+
+Arima
+```{r}
+arima = auto.arima(AirPassengers)
+arima
+```
+
